@@ -1,18 +1,13 @@
-# JAX-RS RESTful Web Service
-Using:
- - Jersey framework
+# A Jersey boilerplate
+Using Jersey framework, this boilerplate can be a good starting point for a web application, JAX-RS RESTful web service or a mixture of both.
 
-For testing:
+Also ready for testing from day zero using:
  - JUnit
- - Hamcrest
- - Jetty Gradle Plugin
+ - Jetty as Gradle Plugin
 
-Although Jetty is used for running server instance for tests,
-the final `war` file produced can be potentially deployed to
-any Java Servlet container environment.
+Although Jetty is used for running server instance for tests, the final `war` file produced can be potentially deployed to any Java Servlet container environment.
 
-Servlet is configured by `src/webapp/WEB-INF/web.xml` (the
-classic way).
+Servlet is configured by `src/webapp/WEB-INF/web.xml` (the classic way).
 
 ## How to use
  - obviously, check out repo
