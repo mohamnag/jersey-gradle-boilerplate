@@ -13,9 +13,16 @@ dependencies {
     testCompile 'com.sun.jersey:jersey-client:1.17.1'
 
     compile 'com.sun.jersey:jersey-core:1.17.1'
-    compile 'com.sun.jersey:jersey-server:1.17.1'            
+    compile 'com.sun.jersey:jersey-server:1.17.1'
+
+    // required for running web app as servlet
     compile 'com.sun.jersey:jersey-servlet:1.17.1'
 
+    // required for JSON request and responses
+    compile "com.sun.jersey:jersey-json:1.9.1"
+
+    // required for interceptors and filters.
+    compile 'com.sun.jersey.contribs:jersey-contribs:1.19'
 }
 
 test {
