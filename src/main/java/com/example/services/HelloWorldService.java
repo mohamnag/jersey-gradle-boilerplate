@@ -10,16 +10,16 @@ import com.example.data_transfer_objects.HelloUser;
  */
 public class HelloWorldService {
 
-	public Hello sayHello() {
-		Hello hello = new Hello();
-		hello.setTheWord("Hello, World!");
+    public Hello sayHello() {
+        Hello hello = new Hello();
+        hello.setTheWord("Hello, World!");
 
-		return hello;
-	}
+        return hello;
+    }
 
-	public Hello sayHelloUser(String name) {
-		HelloUser helloUser = new HelloUser(name);
+    public Hello sayHelloUser(String name) {
+        HelloUser helloUser = new HelloUser(name);
 
-		return helloUser;
-	}
+        return helloUser;
+    }
 }

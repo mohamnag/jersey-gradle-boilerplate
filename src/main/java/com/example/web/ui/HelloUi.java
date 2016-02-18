@@ -17,15 +17,17 @@ import javax.ws.rs.PathParam;
  * TODO: replace this class with similar ones for your demand
  */
 @Path("/")
-public class HelloWeb {
+public class HelloUi {
 
     private static HelloWorldService helloWorldService = new HelloWorldService();
 
+    // todo this to return HTML using handlebars
     @GET()
     public String hello() {
         return helloWorldService.sayHello().toString();
     }
 
+    // todo this to return HTML using handlebars
     @GET()
     @Path("/{name}")
     public String helloUser(@PathParam("name") String name) {
