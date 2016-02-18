@@ -23,23 +23,30 @@ dependencies {
 
     // required for interceptors and filters.
     compile 'com.sun.jersey.contribs:jersey-contribs:1.19'
+
 }
 
 test {
     exclude '**/*IntegrationTest*'
 }
 
-task integrationTest(type: Test) {
+/*
+    Integration Tests
+ */
+
+// port & root path for test
+[jettyRun, jettyRunWar]*.httpPort = 8080
+[jettyRun, jettyRunWar]*.contextPath = '/'
+
+// other jetty settings
+[jettyRun, jettyRunWar]*.daemon = true
+[jettyRun, jettyRunWar, jettyStop]*.stopPort = 8081
+[jettyRun, jettyRunWar, jettyStop]*.stopKey = 'stop'
+
+task integrationTest(type: Test, dependsOn: "test") {
+
+    dependsOn "jettyRun"
+    finalizedBy "jettyStop"
+
     include '**/*IntegrationTest*'
-    doFirst {
-        jettyRun.contextPath = '/';
-        jettyRun.httpPort = 8080    // Port for test
-        jettyRun.daemon = true
-        jettyRun.execute()
-    }
-    doLast {
-        jettyStop.stopPort = 8091   // Port for stop signal
-        jettyStop.stopKey = 'stopKey'
-        jettyStop.execute()
-    }
 }
