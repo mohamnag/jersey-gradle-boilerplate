@@ -19,3 +19,7 @@ Servlet is configured by `src/webapp/WEB-INF/web.xml` (the classic way).
 
 *NOTE* in order to run integration tests, you need both ports 8080 & 8081 free. If it is not possible, change both the
 settings in `build.gradle` and URLs in tests.
+
+
+## Credits
+Basic idea of this code comes from [ziroby/jetty-gradle-hello-world](https://github.com/ziroby/jetty-gradle-hello-world) however it has been evolved and gone in a different direction with the time.

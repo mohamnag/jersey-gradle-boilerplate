@@ -8,7 +8,7 @@
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
          id="WebApp_ID" version="2.5">
 
-    <display-name>Jetty Gradle Hello World</display-name>
+    <display-name>Jersey Boilerplate</display-name>
 
     <servlet>
         <!-- TODO update servlet name -->
@@ -21,7 +21,7 @@
 
             <!-- load all classes under this package for this servlet -->
             <!-- TODO update package name if necessary -->
-            <param-value>com.ziroby.hello.webapp</param-value>
+            <param-value>com.example.webui</param-value>
         </init-param>
 
         <!--     <init-param> -->
