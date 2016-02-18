@@ -24,6 +24,8 @@ dependencies {
     // required for interceptors and filters.
     compile 'com.sun.jersey.contribs:jersey-contribs:1.19'
 
+    // required for using handlebars templates in responses
+    compile 'com.github.jknack:handlebars.java:4.0.4'
 }
 
 test {
@@ -35,7 +37,7 @@ task integrationTest(type: Test, dependsOn: "test") {
     dependsOn "jettyRun"
     finalizedBy "jettyStop"
 
-    include '**/*IntegrationTest*'
+    include '**/IntegrationTest/**'
 }
 
 // port & root path for integration tests

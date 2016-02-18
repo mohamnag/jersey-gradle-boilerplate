@@ -12,7 +12,7 @@
 
     <servlet>
         <!-- TODO update servlet name -->
-        <servlet-name>HelloWorldServlet</servlet-name>
+        <servlet-name>HelloWebUiServlet</servlet-name>
 
         <servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
 
@@ -21,7 +21,7 @@
 
             <!-- load all classes under this package for this servlet -->
             <!-- TODO update package name if necessary -->
-            <param-value>com.example.webui</param-value>
+            <param-value>com.example.web.ui</param-value>
         </init-param>
 
         <!--     <init-param> -->
@@ -33,11 +33,41 @@
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>HelloWorldServlet</servlet-name>
+        <servlet-name>HelloWebUiServlet</servlet-name>
 
         <!-- this mounts servlet on root -->
         <!-- TODO update mount point if necessary -->
-        <url-pattern>/*</url-pattern>
+        <url-pattern>/ui/*</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <!-- TODO update servlet name -->
+        <servlet-name>HelloWebApiServlet</servlet-name>
+
+        <servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
+
+        <init-param>
+            <param-name>com.sun.jersey.config.property.packages</param-name>
+
+            <!-- load all classes under this package for this servlet -->
+            <!-- TODO update package name if necessary -->
+            <param-value>com.example.web.api</param-value>
+        </init-param>
+
+        <!--     <init-param> -->
+        <!--         <param-name>com.sun.jersey.api.json.POJOMappingFeature</param-name> -->
+        <!--         <param-value>true</param-value> -->
+        <!--     </init-param> -->
+
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>HelloWebApiServlet</servlet-name>
+
+        <!-- this mounts servlet on root -->
+        <!-- TODO update mount point if necessary -->
+        <url-pattern>/api/*</url-pattern>
     </servlet-mapping>
 
 </web-app>
