@@ -20,3 +20,7 @@ classic way).
  - update values in `src/webapp/WEB-INF/web.xml`
  - write tests and integration tests in test package, all tests with `IntegrationTest` are run as integration tests while server is running on `localhost:8080/`
  - write code in web app package to pass the tests
+
+
+*NOTE* in order to run integration tests, you need both ports 8080 & 8081 free. If it is not possible, change both the
+settings in `build.gradle` and URLs in tests.
