@@ -27,12 +27,4 @@ public class HelloApiTest {
         assertEquals(response, "Hello, Max!");
     }
 
-    @Test
-    public void testHelloUserQueryParam() throws Exception {
-        Client client = Client.create();
-        WebResource webResource = client.resource(HELLO_URL + "?name=Min");
-        String response = webResource.get(String.class);
-
-        assertEquals(response, "Hello, Min!");
-    }
 }

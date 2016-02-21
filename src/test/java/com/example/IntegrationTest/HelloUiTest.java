@@ -28,13 +28,4 @@ public class HelloUiTest {
         assertThat(response, is("Hello, Max!"));
     }
 
-    @Test
-    public void testHelloUserQueryParam() throws Exception {
-        Client client = Client.create();
-        WebResource webResource = client.resource(HELLO_URL + "?name=Min");
-        String response = webResource.get(String.class);
-
-        assertThat(response, is("Hello, Min!"));
-    }
-
 }
