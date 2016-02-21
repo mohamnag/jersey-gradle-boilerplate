@@ -2,9 +2,40 @@ apply plugin: 'java'
 apply plugin: 'war'
 apply plugin: 'jetty'
 
+// port & root path for integration tests
+[jettyRun, jettyRunWar]*.httpPort = 8080
+[jettyRun, jettyRunWar]*.contextPath = ''
+
+// other jetty settings
+[jettyRun, jettyRunWar]*.daemon = true
+[jettyRun, jettyRunWar, jettyStop]*.stopPort = 8081
+[jettyRun, jettyRunWar, jettyStop]*.stopKey = 'stop'
+
+// workaround for jettyStop when using gradle daemon
+import org.gradle.api.plugins.jetty.internal.Monitor
+
+[jettyRun, jettyRunWar]*.doLast {
+    /**
+     * THIS IS A WORKAROUND! THE CURRENT VERSION OF THIS TASK DOESN'T START A WATCHER IN DAEMON MODE
+     *
+     * If starting the monitor fails, it may be because the jetty task was updated to fix this issue
+     * When that happens, we shouldn't need the custom task any more
+     *
+     * Copied From: AbstractJettyRunTask
+     *
+     * https://issues.gradle.org/browse/GRADLE-2263
+     */
+    if (getStopPort() != null && getStopPort() > 0 && getStopKey() != null) {
+        Monitor monitor = new Monitor(getStopPort(), getStopKey(), server.getProxiedObject());
+        monitor.start();
+    }
+}
+
+
 repositories {
     mavenCentral()
 }
+
 
 dependencies {
 
@@ -28,11 +59,13 @@ dependencies {
     compile 'com.github.jknack:handlebars:4.0.4'
 }
 
+
 test {
-    exclude '**/*IntegrationTest*'
+    exclude '**/IntegrationTest/**'
 }
 
-task integrationTest(type: Test, dependsOn: "test") {
+
+task integrationTest(type: Test, dependsOn: test) {
 
     dependsOn "jettyRun"
     finalizedBy "jettyStop"
@@ -40,36 +73,11 @@ task integrationTest(type: Test, dependsOn: "test") {
     include '**/IntegrationTest/**'
 }
 
-// port & root path for integration tests
-[jettyRun, jettyRunWar]*.httpPort = 8080
-[jettyRun, jettyRunWar]*.contextPath = ''
 
-// other jetty settings
-[jettyRun, jettyRunWar]*.daemon = true
-[jettyRun, jettyRunWar, jettyStop]*.stopPort = 8081
-[jettyRun, jettyRunWar, jettyStop]*.stopKey = 'stop'
-
-// workaround for jettyStop when using gradle daemon
-import org.gradle.api.plugins.jetty.internal.Monitor
-[jettyRun, jettyRunWar]*.doLast {
-    /**
-     * THIS IS A WORKAROUND! THE CURRENT VERSION OF THIS TASK DOESN'T START A WATCHER IN DAEMON MODE
-     *
-     * If starting the monitor fails, it may be because the jetty task was updated to fix this issue
-     * When that happens, we shouldn't need the custom task any more
-     *
-     * Copied From: AbstractJettyRunTask
-     *
-     * https://issues.gradle.org/browse/GRADLE-2263
-     */
-    if (getStopPort() != null && getStopPort() > 0 && getStopKey() != null) {
-        Monitor monitor = new Monitor(getStopPort(), getStopKey(), server.getProxiedObject());
-        monitor.start();
-    }
-}
-
-task serveDemo << {
-    jettyRun.daemon = false;
-
+task serveDemo {
     finalizedBy "jettyRun"
+
+    doFirst {
+        jettyRun.daemon = false
+    }
 }
