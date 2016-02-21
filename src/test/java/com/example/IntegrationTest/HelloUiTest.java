@@ -4,7 +4,7 @@ import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.WebResource;
 import org.junit.Test;
 
-import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.containsString;
 import static org.junit.Assert.assertThat;
 
 public class HelloUiTest {
@@ -13,19 +13,20 @@ public class HelloUiTest {
     @Test
     public void testHello() throws Exception {
         Client client = Client.create();
-        WebResource webResource = client.resource(HELLO_URL);
+        WebResource webResource = client.resource(HELLO_URL + "/hello");
         String response = webResource.get(String.class);
 
-        assertThat(response, is("Hello, World!"));
+        assertThat(response, containsString("Hello, World!"));
     }
 
     @Test
     public void testHelloUser() throws Exception {
         Client client = Client.create();
-        WebResource webResource = client.resource(HELLO_URL + "/Max");
+        WebResource webResource = client.resource(HELLO_URL + "/hello/Max");
         String response = webResource.get(String.class);
 
-        assertThat(response, is("Hello, Max!"));
+        assertThat(response, containsString("Hello,"));
+        assertThat(response, containsString("Max"));
     }
 
 }
