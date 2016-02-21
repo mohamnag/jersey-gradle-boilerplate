@@ -2,8 +2,6 @@ package com.example.data_transfer_objects;
 
 /**
  * A simple POJO used as a data transfer object.
- *
- * Created by mohamnag on 18/02/16.
  */
 public class Hello {
 
