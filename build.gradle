@@ -42,7 +42,7 @@ task integrationTest(type: Test, dependsOn: "test") {
 
 // port & root path for integration tests
 [jettyRun, jettyRunWar]*.httpPort = 8080
-[jettyRun, jettyRunWar]*.contextPath = '/'
+[jettyRun, jettyRunWar]*.contextPath = ''
 
 // other jetty settings
 [jettyRun, jettyRunWar]*.daemon = true
@@ -66,4 +66,10 @@ import org.gradle.api.plugins.jetty.internal.Monitor
         Monitor monitor = new Monitor(getStopPort(), getStopKey(), server.getProxiedObject());
         monitor.start();
     }
+}
+
+task serveDemo << {
+    jettyRun.daemon = false;
+
+    finalizedBy "jettyRun"
 }
