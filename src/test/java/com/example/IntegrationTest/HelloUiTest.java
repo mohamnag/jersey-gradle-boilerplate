@@ -11,6 +11,9 @@ import javax.ws.rs.core.MediaType;
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.junit.Assert.assertThat;
 
+/**
+ * A sample test class for UI resources which return mainly HTML.
+ */
 public class HelloUiTest {
     private static String HELLO_URL = "http://localhost:8080/";
 

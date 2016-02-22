@@ -47,7 +47,7 @@ dependencies {
     // Jersey server
     compile 'org.glassfish.jersey.containers:jersey-container-servlet:2.22.1'
 
-    // Jackson for JSON transformations
+    // Jackson for JSON transformations: https://jersey.java.net/documentation/latest/media.html#json.jackson
     compile 'org.glassfish.jersey.media:jersey-media-json-jackson:2.22.1'
 
     // required for using handlebars templates in responses
