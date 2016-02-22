@@ -1,28 +1,49 @@
 package com.example.IntegrationTest;
 
-import com.sun.jersey.api.client.Client;
-import com.sun.jersey.api.client.WebResource;
+import org.glassfish.jersey.client.ClientConfig;
 import org.junit.Test;
+
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.WebTarget;
+import javax.ws.rs.core.MediaType;
 
 import static org.junit.Assert.assertEquals;
 
 public class HelloApiTest {
-    private static String HELLO_URL = "http://localhost:8080/api";
+    private static String HELLO_URL = "http://localhost:8080";
 
     @Test
     public void testHello() throws Exception {
-        Client client = Client.create();
-        WebResource webResource = client.resource(HELLO_URL);
-        String response = webResource.get(String.class);
+
+        ClientConfig config = new ClientConfig();
+        Client client = ClientBuilder.newClient(config);
+
+        WebTarget target = client.target(HELLO_URL);
+        String response = target
+                .path("api")
+                .path("hello")
+                .request()
+                .accept(MediaType.APPLICATION_JSON)
+                .get(String.class);
 
         assertEquals(response, "Hello, World!");
     }
 
     @Test
     public void testHelloUser() throws Exception {
-        Client client = Client.create();
-        WebResource webResource = client.resource(HELLO_URL + "/Max");
-        String response = webResource.get(String.class);
+
+        ClientConfig config = new ClientConfig();
+        Client client = ClientBuilder.newClient(config);
+
+        WebTarget target = client.target(HELLO_URL);
+        String response = target
+                .path("api")
+                .path("hello")
+                .path("Max")
+                .request()
+                .accept(MediaType.APPLICATION_JSON)
+                .get(String.class);
 
         assertEquals(response, "Hello, Max!");
     }
