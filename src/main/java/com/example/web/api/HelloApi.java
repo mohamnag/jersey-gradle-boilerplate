@@ -26,7 +26,6 @@ public class HelloApi {
 
     // todo this to return JSON
     @GET()
-    @Path("/")
     @Produces(MediaType.APPLICATION_JSON)
     public Hello hello() {
         return helloWorldService.sayHello();
